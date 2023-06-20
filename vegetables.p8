@@ -27,6 +27,8 @@ function _update()
 	if btn(⬇️) then
 		player.y += 1
 	end
+	
+	camera(player.x-63 ,player.y-63)
 end
 
 function _draw()
