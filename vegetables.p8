@@ -1,5 +1,42 @@
 pico-8 cartridge // http://www.pico-8.com
 version 38
+__lua__
+
+function _init()
+	player = {
+		x = 60,
+		y = 60,
+		fx = false
+	}
+end
+
+function _update()
+	if btn(➡️) then
+		player.x += 1
+		player.fx = false
+	end
+
+	if btn(⬅️) then
+		player.x -= 1
+		player.fx = true
+	end
+
+	if btn(⬆️) then
+		player.y -= 1
+	end
+	if btn(⬇️) then
+		player.y += 1
+	end
+end
+
+function _draw()
+	cls()
+
+	map()
+
+	spr(13, player.x, player.y, 1, 1, player.fx)
+end
+
 __gfx__
 333333333333333333333333000bb000cccccccc000880003333333300b3bb00b788887b000bb0b300000330333333330bb009a9777007777770077777700777
 37333333333333333333373300bbbb00ccc77ccc008888003333bb3300eb3e00b788887b0000b3bb00099aa34933493300bb9a9a7e7777e77e7777e77e7777e7
