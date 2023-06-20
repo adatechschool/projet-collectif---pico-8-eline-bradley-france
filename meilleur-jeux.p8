@@ -1,27 +1,36 @@
 pico-8 cartridge // http://www.pico-8.com
 version 38
 __lua__
-function _init()
-x=60
-y=60
 
+function _init()
+    player = {
+        x = 63,
+        y = 63,
+        f = false
+    }
 end
 
 function _update()
-if(btn(➡️)) x +=1
-if(btn(⬅️)) x -=1
-if(btn(⬆️)) y -=1
-if(btn(⬇️)) y +=1
+    --player movement--
+    if (btn(➡️)) then
+        player.x += 1
+        player.f = false
+    end
+    if (btn(⬅️)) then 
+        player.x -= 1
+        player.f = true
+    if (btn(⬆️)) player.y -= 1
+    if (btn(⬇️)) player.y += 1
 end
 
 function _draw()
-cls()
+    cls()
 
-map(0,0,0,0)
+    map()
 
-spr(0,x,y)
-
+    spr(0, player.x, player.y, 1, 1, player.f)
 end
+
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
