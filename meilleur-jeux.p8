@@ -12,13 +12,14 @@ end
 
 function _update()
     --player movement--
-    if (btn(➡️)) then
+    if btn(➡️) then
         player.x += 1
         player.f = false
     end
-    if (btn(⬅️)) then 
+    if btn(⬅️) then
         player.x -= 1
         player.f = true
+    end
     if (btn(⬆️)) player.y -= 1
     if (btn(⬇️)) player.y += 1
 end
