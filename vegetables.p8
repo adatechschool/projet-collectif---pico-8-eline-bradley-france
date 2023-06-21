@@ -21,7 +21,7 @@ function _draw()
 end
 
 --VARIABLES
-map_sprite = { 5 }
+map_sprite = 5
 
 -- map
 function draw_map()
