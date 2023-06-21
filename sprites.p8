@@ -1,5 +1,85 @@
 pico-8 cartridge // http://www.pico-8.com
 version 38
+--3 GAME FUNCTIONS
+function _init()
+	create_player()
+end
+
+function _update()
+	player_movement()
+	animation()
+	check_collision()
+	camera(player.x - 63, player.y - 63)
+end
+
+function _draw()
+	cls()
+	draw_map()
+	draw_player()
+end
+
+--VARIABLES
+map_sprite = 5
+
+-- map
+function draw_map()
+	map()
+end
+
+-- player
+function animation()
+	if btn(➡️) or btn(⬅️) or btn(⬆️) or btn(⬇️) then
+		player.anim += player.timing
+		if player.anim > 15 then
+			player.anim = 13
+		end
+	end
+end
+
+function create_player()
+	player = {
+		x = 60,
+		y = 60,
+		fx = false,
+		timing = 0.20,
+		anim = 13
+	}
+end
+
+function player_movement()
+	if btn(➡️) then
+		player.x += 1
+		player.fx = false
+	end
+
+	if btn(⬅️) then
+		player.x -= 1
+		player.fx = true
+	end
+
+	if btn(⬆️) then
+		player.y -= 1
+	end
+
+	if btn(⬇️) then
+		player.y += 1
+	end
+end
+
+function draw_player()
+	frame = player.anim % 3
+	sprite = 13 + frame
+	spr(sprite, player.x, player.y, 1, 1, player.fx)
+end
+
+function check_collision()
+	player_tile_x = flr(player.x / 8)
+	player_tile_y = flr(player.y / 8)
+
+	if mget(player_tile_x, player_tile_y) == map_sprite then
+		mset(player_tile_x, player_tile_y, 1)
+	end
+end
 __gfx__
 333333333333333333333333333bb333cccccccc333883333311ccc343b4b3b444444444444bb4b344444334333333334bb449a9777007777770077777700777
 37333333333333333333373333bbbb33ccc77ccc33888833311cccc3443b3b44444444444444b3bb44499aa34933493344bb9a9a7e7777e77e7777e77e7777e7
