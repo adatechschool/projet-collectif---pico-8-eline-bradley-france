@@ -1,9 +1,27 @@
 pico-8 cartridge // http://www.pico-8.com
 version 38
 __lua__
+
+function _init()
+	create_player()
+end
+
+function _update()
+	player_movement()
+	animation()
+	camera(player.x - 63, player.y - 63)
+end
+
+function _draw()
+	cls()
+	draw_map()
+	draw_player()
+end
+
 -- map
 function draw_map()
 	map()
+	mushroom_sprite = 5
 end
 
 -- player
@@ -53,27 +71,12 @@ function draw_player()
 end
 
 function check_collision()
-	player_tile_x = flr((player.x+4)/8+1)
-	player_tile_y = flr((player.y+4)/8+1)
+	player_tile_x = flr((player.x + 4) / 8 + 1)
+	player_tile_y = flr((player.y + 4) / 8 + 1)
 
-	if mget(player_tile_x, player_tile_y)
-end
-
-
-function _init()
-	create_player()
-end
-
-function _update()
-	player_movement()
-	animation()
-	camera(player.x - 63, player.y - 63)
-end
-
-function _draw()
-	cls()
-	draw_map()
-	draw_player()
+	if mget(player_tile_x, player_tile_y) == mushroom_sprite then
+		mset(player_tile_x, player_tile_y, 1)
+	end
 end
 
 __gfx__
