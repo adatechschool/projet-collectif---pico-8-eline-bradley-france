@@ -7,16 +7,10 @@ function _init()
 end
 
 function _update()
-	
-	player_movement()	
-	
-camera(player.x-63 ,player.y-63)
-
-
-
+	player_movement()
+	animation()
+	camera(player.x - 63, player.y - 63)
 end
-
-
 
 function _draw()
 	cls()
@@ -24,27 +18,32 @@ function _draw()
 	draw_player()
 end
 
--->8
---map
-
+-- map
 function draw_map()
 	map()
 end
--->8
---player
+
+-- player
+function animation()
+	if btn(➡️) or btn(⬅️) or btn(⬆️) or btn(⬇️) then
+		player.anim += player.timing
+		if player.anim > 15 then
+			player.anim = 13
+		end
+	end
+end
 
 function create_player()
-
 	player = {
 		x = 60,
 		y = 60,
-		fx = false
+		fx = false,
+		timing = 0.20,
+		anim = 13
 	}
-	
 end
 
 function player_movement()
-
 	if btn(➡️) then
 		player.x += 1
 		player.fx = false
@@ -62,14 +61,14 @@ function player_movement()
 	if btn(⬇️) then
 		player.y += 1
 	end
-	
-end	
+end
 
 function draw_player()
-
-	spr(13, player.x, player.y, 1, 1, player.fx)
-
+	frame = player.anim % 3
+	sprite = 13 + frame
+	spr(sprite, player.x, player.y, 1, 1, player.fx)
 end
+
 __gfx__
 333333333333333333333333000bb000cccccccc000880003333333300b3bb00b788887b000bb0b300000330333333330bb009a9777007777770077777700777
 373333333b333b333333373300bbbb00ccc77ccc008888003333bb3300eb3e00b788887b0000b3bb00099aa34933493300bb9a9a7e7777e77e7777e77e7777e7
