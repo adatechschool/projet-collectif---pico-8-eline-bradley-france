@@ -2,6 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 38
 __lua__
 
+--3 GAME FUNCTIONS
 function _init()
 	create_player()
 end
@@ -9,6 +10,7 @@ end
 function _update()
 	player_movement()
 	animation()
+	check_collision()
 	camera(player.x - 63, player.y - 63)
 end
 
@@ -18,10 +20,12 @@ function _draw()
 	draw_player()
 end
 
+--VARIABLES
+mushroom_sprite = 5
+
 -- map
 function draw_map()
 	map()
-	mushroom_sprite = 5
 end
 
 -- player
