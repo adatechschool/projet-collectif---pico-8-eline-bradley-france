@@ -21,7 +21,7 @@ function _draw()
 end
 
 --VARIABLES
-mushroom_sprite = 5
+map_sprite = { 5 }
 
 -- map
 function draw_map()
@@ -75,10 +75,10 @@ function draw_player()
 end
 
 function check_collision()
-	player_tile_x = flr((player.x + 4) / 8 + 1)
-	player_tile_y = flr((player.y + 4) / 8 + 1)
+	player_tile_x = flr(player.x / 8)
+	player_tile_y = flr(player.y / 8)
 
-	if mget(player_tile_x, player_tile_y) == mushroom_sprite then
+	if mget(player_tile_x, player_tile_y) == map_sprite then
 		mset(player_tile_x, player_tile_y, 1)
 	end
 end
