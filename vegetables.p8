@@ -5,6 +5,7 @@ __lua__
 --3 GAME FUNCTIONS
 function _init()
 	create_player()
+	ipickups()
 end
 
 function _update()
@@ -12,12 +13,14 @@ function _update()
 	animation()
 	check_sprite()
 	camera(player.x - 63, player.y - 63)
+	upickups()
 end
 
 function _draw()
 	cls()
 	draw_map()
 	draw_player()
+	dpickups()
 end
 
 --VARIABLES
@@ -82,6 +85,7 @@ function player_movement(player)
 	end
 end
 
+--detects if the player sprite tries to enter a forbiden flag sprite
 function collide(player)
 	local x1 = player.x / 8
 	local y1 = player.y / 8
