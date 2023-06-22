@@ -26,6 +26,11 @@ function draw_map()
 	map()
 end
 
+function check_flag(flag,x,y)
+	local sprite = mget(x,y)
+	return fget(sprite,flag)
+end
+
 -- player
 function animation()
 	if btn(➡️) or btn(⬅️) or btn(⬆️) or btn(⬇️) then
@@ -45,11 +50,21 @@ function create_player()
 	}
 end
 
-function player_movement()
-	if (btn(➡️)) player.x += 1
-	if (btn(⬅️)) player.x -= 1
-	if (btn(⬆️)) player.y -= 1
-	if (btn(⬇️)) player.y += 1
+function player_movement(player)
+
+	newx = player.x 
+	newy = player.y
+
+	if (btn(➡️)) newx += 1
+	if (btn(⬅️)) newx -= 1
+	if (btn(⬆️)) newy -= 1
+	if (btn(⬇️)) newy += 1
+
+	if not check_flag(0,newx,newy) then 
+		player.x = newx
+		player.y = newy
+	end
+
 end
 
 function draw_player()
