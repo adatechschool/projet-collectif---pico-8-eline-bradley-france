@@ -118,6 +118,7 @@ function draw_player()
 	end
 end
 
+--Simple function to 'pickup' a mushroom sprite and replace with grass
 function check_sprite()
 	player_tile_x = flr(player.x / 8)
 	player_tile_y = flr(player.y / 8)
