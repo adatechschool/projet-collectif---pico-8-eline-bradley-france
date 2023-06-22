@@ -46,10 +46,10 @@ function create_player()
 end
 
 function player_movement()
-	if btn(➡️) then	player.x += 1
-	if btn(⬅️) then player.x -= 1
-	if btn(⬆️) then	player.y -= 1
-	if btn(⬇️) then	player.y += 1
+	if (btn(➡️)) player.x += 1
+	if (btn(⬅️)) player.x -= 1
+	if (btn(⬆️)) player.y -= 1
+	if (btn(⬇️)) player.y += 1
 end
 
 function draw_player()
