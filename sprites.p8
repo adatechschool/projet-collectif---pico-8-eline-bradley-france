@@ -40,36 +40,22 @@ function create_player()
 	player = {
 		x = 60,
 		y = 60,
-		fx = false,
 		timing = 0.20,
 		anim = 13
 	}
 end
 
 function player_movement()
-	if btn(➡️) then
-		player.x += 1
-		player.fx = false
-	end
-
-	if btn(⬅️) then
-		player.x -= 1
-		player.fx = true
-	end
-
-	if btn(⬆️) then
-		player.y -= 1
-	end
-
-	if btn(⬇️) then
-		player.y += 1
-	end
+	if btn(➡️) then	player.x += 1
+	if btn(⬅️) then player.x -= 1
+	if btn(⬆️) then	player.y -= 1
+	if btn(⬇️) then	player.y += 1
 end
 
 function draw_player()
 	frame = player.anim % 3
 	sprite = 13 + frame
-	spr(sprite, player.x, player.y, 1, 1, player.fx)
+	spr(sprite, player.x, player.y, 1, 1,)
 end
 
 function check_collision()
