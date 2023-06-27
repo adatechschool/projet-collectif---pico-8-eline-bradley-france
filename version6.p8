@@ -48,7 +48,7 @@ function player_movement()
 	if (btnp(⬇️)) newy += 1
 	if (btnp(⬆️)) newy -= 1
 	if not check_flag(0, newx, newy) then
-		player.x = mid(0, newx, 60)
+		player.x = mid(0, newx, 100)
 		player.y = mid(0, newy, 23)
 	end
 end
@@ -74,7 +74,7 @@ function update_camera()
 	camy = mid(0, player.y - 7.5, 24 - 15)
 	camera(camx * 8, camy * 8)
 	if open_door() == true then
-		camx = mid(0, player.x - 7.5, 100 - 15)
+		camx = mid(0, player.x - 7.5,100 - 15)
 		camy = mid(0, player.y - 7.5, 24 - 15)
 		camera(camx * 8, camy * 8)
 	end
@@ -84,7 +84,7 @@ end
 function draw_map()
 	map(0, 0, 0, 0, 44, 25)
 	if open_door() == true then
-		map(0, 0, 0, 0, 100, 25)
+		map(0, 0, 0, 0, 200, 25)
 	end
 end
 
