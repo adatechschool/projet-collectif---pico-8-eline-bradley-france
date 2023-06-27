@@ -70,10 +70,17 @@ function update_camera()
 	camx=mid(0,player.x-7.5,43-15)
 	camy=mid(0, player.y-7.5,24-15)
 	camera(camx*8, camy*8)
+	if open_door() == true then
+		camx=mid(0,player.x-7.5,100-15)
+		camy=mid(0, player.y-7.5,24-15)
+		camera(camx*8, camy*8)
 end
 
 function draw_map()
 	map(0,0,0,0,44,25)
+	if open_door() == true then
+		map(0,0,0,0,100,25)
+	end
 end
 
 function draw_player()
@@ -129,7 +136,8 @@ function open_door()
 		--fset(81,0,false)
 		mset(43,5,85)
 		mset(43,6,84)
-end
+	return true
+	end
 end
 
 
