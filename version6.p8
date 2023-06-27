@@ -129,8 +129,14 @@ function fill_the_basket()
 	camera()
 	if score <= 10 then 
 		return "keep gardening!"
+	elseif score <= 20 then
+		return "You're doing great!"
+	elseif score <= 30 then
+		return "Nearly there!"
+	elseif score <= 44 then
+		return "Just a few more, you can do it!"
 	else
-		return "congrats, you can see your basket now!"
+		return "Congrats,the door is open!!"
 	end
 end
 
