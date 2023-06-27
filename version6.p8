@@ -21,9 +21,8 @@ function _draw()
 	cls()
 	draw_map()
 	draw_player()
-	print(fill_the_basket(),4,4,7)
+	print(fill_the_basket(), 4, 4, 7)
 	draw_score()
-
 end
 
 --PLayer object created to contain properties
@@ -39,30 +38,29 @@ function create_player()
 	}
 end
 
-
 --Function which enables player movement and collision/blocking movement
 function player_movement()
 	newx = player.x
 	newy = player.y
 
-	if (btnp(➡️)) newx +=1
-	if (btnp(⬅️)) newx -=1
-	if (btnp(⬇️)) newy +=1
-	if (btnp(⬆️)) newy -=1
-if not check_flag (0,newx, newy) then 
-	player.x = mid (0, newx,60)
-	player.y = mid (0, newy, 23	)
-end
+	if (btnp(➡️)) newx += 1
+	if (btnp(⬅️)) newx -= 1
+	if (btnp(⬇️)) newy += 1
+	if (btnp(⬆️)) newy -= 1
+	if not check_flag(0, newx, newy) then
+		player.x = mid(0, newx, 60)
+		player.y = mid(0, newy, 23)
+	end
 end
 
 --Function for looping through sprites for animation effect
 function player_animation()
-	if (btnp(➡️)) or (btnp(⬅️)) or (btnp(⬇️)) then
+	if btnp(➡️) or btnp(⬅️) or btnp(⬇️) then
 		player.anim1 += player.timing
 		if player.anim1 > 15 then
-		player.anim1 = 12
-	end
-	elseif (btn(⬆️)) then
+			player.anim1 = 12
+		end
+	elseif btn(⬆️) then
 		player.anim2 += player.timingup
 		if player.anim2 > 31 then
 			player.anim2 = 29
@@ -72,64 +70,65 @@ end
 
 --Limits the camera screen/unlocks after objective met
 function update_camera()
-	camx=mid(0,player.x-7.5,43-15)
-	camy=mid(0, player.y-7.5,24-15)
-	camera(camx*8, camy*8)
+	camx = mid(0, player.x - 7.5, 43 - 15)
+	camy = mid(0, player.y - 7.5, 24 - 15)
+	camera(camx * 8, camy * 8)
 	if open_door() == true then
-		camx=mid(0,player.x-7.5,100-15)
-		camy=mid(0, player.y-7.5,24-15)
-		camera(camx*8, camy*8)
+		camx = mid(0, player.x - 7.5, 100 - 15)
+		camy = mid(0, player.y - 7.5, 24 - 15)
+		camera(camx * 8, camy * 8)
+	end
 end
 
 --Limits map size until object is met.
 function draw_map()
-	map(0,0,0,0,44,25)
+	map(0, 0, 0, 0, 44, 25)
 	if open_door() == true then
-		map(0,0,0,0,100,25)
+		map(0, 0, 0, 0, 100, 25)
 	end
 end
 
 -- Draws the player sprite on the map using animation logic
 function draw_player()
-	if (btn(➡️)) or (btn(⬅️)) or (btn(⬇️)) then
+	if btn(➡️) or btn(⬅️) or btn(⬇️) then
 		frame = player.anim1 % 3.75
 		local sprite = 12 + frame
-		spr(sprite, player.x*8, player.y*8)
-	elseif (btn(⬆️)) then
+		spr(sprite, player.x * 8, player.y * 8)
+	elseif btn(⬆️) then
 		frame = player.anim2 % 4
 		local sprite = 29 + frame
-		spr(sprite, player.x*8, player.y*8)
-	else 
-		spr(player.sprite, player.x*8, player.y*8)
+		spr(sprite, player.x * 8, player.y * 8)
+	else
+		spr(player.sprite, player.x * 8, player.y * 8)
 	end
 end
 
 --Replaces fruit and veg sprites and increases score
 function pick_up()
-    if check_flag (1, newx, newy) then
-        mset(newx, newy, 1)
-		score +=1
+	if check_flag(1, newx, newy) then
+		mset(newx, newy, 1)
+		score += 1
 	elseif check_flag(2, newx, newy) then
 		mset(newx, newy, 39)
-		score +=1
-    end
+		score += 1
+	end
 end
 
 --Beautiful function for verification of flag present on map
 function check_flag(flag, x, y)
-local sprite = mget(x,y)
-return fget(sprite, flag)
+	local sprite = mget(x, y)
+	return fget(sprite, flag)
 end
 
 --function create welcome_message()
-	--end
+--end
 
 --Prints encouraging phrase onscreen(camera)
 function fill_the_basket()
 	camera()
 	if score == 0 then
 		return "you must collect vegetables!"
-	elseif score <= 10 then 
+	elseif score <= 10 then
 		return "keep gardening!"
 	elseif score <= 20 then
 		return "you're doing great!"
@@ -145,25 +144,18 @@ end
 --Prints score onscreen(camera)
 function draw_score()
 	camera()
-	spr (78, 4, 10)
-	print (score, 14, 12, 7)
+	spr(78, 4, 10)
+	print(score, 14, 12, 7)
 end
 
 --Opens the door and provides check condition for embiggening the map/camera
 function open_door()
 	if score > 45 then
-		mset(43,5,85)
-		mset(43,6,84)
-	return true
+		mset(43, 5, 85)
+		mset(43, 6, 84)
+		return true
 	end
 end
-
-
-
-
-
-
-
 
 __gfx__
 333333333333333333333333333bb333cccccccc333883333333333343b4b3b444444444444bb4b3444443343333333377700777777007777770077777700777
