@@ -2,6 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 38
 __lua__
 
+--Main game loop
 function _init()
 	create_player()
 	score = 0
@@ -22,10 +23,10 @@ function _draw()
 	draw_player()
 	print(fill_the_basket(),4,4,7)
 	draw_score()
-	--print
-	--fill_the_basket()
+
 end
 
+--PLayer object created to contain properties
 function create_player()
 	player = {
 		x = 6,
@@ -38,6 +39,8 @@ function create_player()
 	}
 end
 
+
+--Function which enables player movement and collision/blocking movement
 function player_movement()
 	newx = player.x
 	newy = player.y
@@ -52,6 +55,7 @@ if not check_flag (0,newx, newy) then
 end
 end
 
+--Function for looping through sprites for animation effect
 function player_animation()
 	if (btnp(➡️)) or (btnp(⬅️)) or (btnp(⬇️)) then
 		player.anim1 += player.timing
@@ -66,6 +70,7 @@ function player_animation()
 	end
 end
 
+--Limits the camera screen/unlocks after objective met
 function update_camera()
 	camx=mid(0,player.x-7.5,43-15)
 	camy=mid(0, player.y-7.5,24-15)
@@ -76,6 +81,7 @@ function update_camera()
 		camera(camx*8, camy*8)
 end
 
+--Limits map size until object is met.
 function draw_map()
 	map(0,0,0,0,44,25)
 	if open_door() == true then
@@ -83,6 +89,7 @@ function draw_map()
 	end
 end
 
+-- Draws the player sprite on the map using animation logic
 function draw_player()
 	if (btn(➡️)) or (btn(⬅️)) or (btn(⬇️)) then
 		frame = player.anim1 % 3.75
@@ -97,43 +104,46 @@ function draw_player()
 	end
 end
 
+--Replaces fruit and veg sprites and increases score
 function pick_up()
     if check_flag (1, newx, newy) then
         mset(newx, newy, 1)
 		score +=1
-		--print (fill_the_basket(), 0,0)
 	elseif check_flag(2, newx, newy) then
 		mset(newx, newy, 39)
 		score +=1
-		--print (fill_the_basket(),0,0)
     end
 end
 
+--Beautiful function for verification of flag present on map
 function check_flag(flag, x, y)
 local sprite = mget(x,y)
 return fget(sprite, flag)
 end
 
 --function create welcome_message()
+	--end
+
+--Prints encouraging phrase onscreen(camera)
 function fill_the_basket()
 	camera()
-	if score < 50 then 
+	if score <= 10 then 
 		return "keep gardening!"
 	else
 		return "congrats, you can see your basket now!"
 	end
 end
 
+--Prints score onscreen(camera)
 function draw_score()
 	camera()
 	spr (78, 4, 10)
 	print (score, 14, 12, 7)
 end
 
+--Opens the door and provides check condition for embiggening the map/camera
 function open_door()
-	if score > 5 then
-		--fset(80,0,false)
-		--fset(81,0,false)
+	if score > 45 then
 		mset(43,5,85)
 		mset(43,6,84)
 	return true
