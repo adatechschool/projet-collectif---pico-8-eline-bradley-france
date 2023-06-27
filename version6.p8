@@ -127,16 +127,18 @@ end
 --Prints encouraging phrase onscreen(camera)
 function fill_the_basket()
 	camera()
-	if score <= 10 then 
+	if score == 0 then
+		return "you must collect vegetables!"
+	elseif score <= 10 then 
 		return "keep gardening!"
 	elseif score <= 20 then
-		return "You're doing great!"
+		return "you're doing great!"
 	elseif score <= 30 then
-		return "Nearly there!"
+		return "nearly there!"
 	elseif score <= 44 then
-		return "Just a few more, you can do it!"
+		return "just a few more, you can do it!"
 	else
-		return "Congrats,the door is open!!"
+		return "congrats,the door is open!!"
 	end
 end
 
