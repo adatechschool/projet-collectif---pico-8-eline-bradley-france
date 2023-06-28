@@ -7,7 +7,7 @@ function _init()
 	create_player()
 	score = 0
 	init_msg()
-	create_msg("welcome", "You have to collect all the vegetables for the other mice!")
+	create_msg("welcome", "you have to collect all the\nvegetables for the other mice!\npress x to begin")
 end
 
 function _update()
@@ -169,9 +169,10 @@ end
 function draw_msg()
 	if messages[1] then
 		local y = 60
-		rectfill(6, y,6+#msg_title*4, y + 6, 2)
-		print(msg_title, 7, y+1, 7)
-		print(messages[1], 0, y + 10, 7)
+		rectfill(6, y, 6 + #msg_title * 4, y + 6, 2)
+		print(msg_title, 7, y + 1, 7)
+		rectfill(6, y + 9, 125, y + 27, 2)
+		print(messages[1], 7, y + 10, 7)
 	end
 end
 
