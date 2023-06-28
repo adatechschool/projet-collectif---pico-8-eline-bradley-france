@@ -11,7 +11,7 @@ end
 
 function _update()
 	--Stops player moving whilst message is displayed
-	if not messages[1] then
+	if not message[1] then
 		player_movement()
 	end
 	update_camera()
