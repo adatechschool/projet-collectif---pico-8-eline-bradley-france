@@ -169,15 +169,15 @@ end
 function draw_msg()
 	if messages[1] then
 		local y = 60
-		rectfill(6, y, 40, y + 6, 2)
-		print(msg_title, 7, y, 7)
-		print(messages[1], 0, y + 12, 7)
+		rectfill(6, y,6+#msg_title*4, y + 6, 2)
+		print(msg_title, 7, y+1, 7)
+		print(messages[1], 0, y + 10, 7)
 	end
 end
 
 -- Enables the message to be deleted from table
 function update_msg()
-	if btnp(X) then
+	if btnp(❎) then
 		deli(messages, 1)
 	end
 end
