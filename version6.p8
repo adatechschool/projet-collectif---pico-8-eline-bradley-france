@@ -164,8 +164,6 @@ function init_msg()
 	messages = {}
 end
 
-create_msg("welcome", "You have to collect all the vegetables for the other mice!")
-
 -- Prints message on screen
 function draw_msg()
 	if message[1] then
@@ -187,6 +185,8 @@ function create_msg(name, ...)
 	msg_title = name
 	messages = { ... }
 end
+
+create_msg("welcome", "You have to collect all the vegetables for the other mice!")
 
 __gfx__
 333333333333333333333333333bb333cccccccc333883333333333343b4b3b444444444444bb4b3444443343333333377700777777007777770077777700777
