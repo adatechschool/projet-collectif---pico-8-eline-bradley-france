@@ -7,15 +7,19 @@ function _init()
 	create_player()
 	score = 0
 	init_msg()
+	create_msg("welcome", "you have to collect all the\nvegetables for the other mice!\npress x to begin")
 end
 
 function _update()
-	player_movement()
+	--Stops player moving whilst message is displayed
+	if not messages[1] then
+		player_movement()
+	end
 	update_camera()
 	pick_up()
 	player_animation()
 	open_door()
-	--update_msg()
+	update_msg()
 end
 
 function _draw()
@@ -76,7 +80,7 @@ function update_camera()
 	camy = mid(0, player.y - 7.5, 24 - 15)
 	camera(camx * 8, camy * 8)
 	if open_door() == true then
-		camx = mid(0, player.x - 7.5,100 - 15)
+		camx = mid(0, player.x - 7.5, 100 - 15)
 		camy = mid(0, player.y - 7.5, 24 - 15)
 		camera(camx * 8, camy * 8)
 	end
@@ -122,10 +126,6 @@ function check_flag(flag, x, y)
 	return fget(sprite, flag)
 end
 
-
-
-
-
 --Prints encouraging phrase onscreen(camera)
 function fill_the_basket()
 	camera()
@@ -160,13 +160,32 @@ function open_door()
 	end
 end
 
+--creates table with message to display
 function init_msg()
-	messages={"welcome"}
-	--create_msg("welcome")
-	end
+	messages = {}
+end
 
+-- Prints message on screen
 function draw_msg()
-	print(messages[1], 0, 60, 7)
+	if messages[1] then
+		local y = 60
+		rectfill(6, y, 6 + #msg_title * 4, y + 6, 2)
+		print(msg_title, 7, y + 1, 7)
+		rectfill(6, y + 9, 125, y + 27, 2)
+		print(messages[1], 7, y + 10, 7)
+	end
+end
+
+-- Enables the message to be deleted from table
+function update_msg()
+	if btnp(❎) then
+		deli(messages, 1)
+	end
+end
+
+function create_msg(name, ...)
+	msg_title = name
+	messages = { ... }
 end
 
 __gfx__
