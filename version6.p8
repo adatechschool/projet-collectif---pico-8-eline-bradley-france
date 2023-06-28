@@ -11,7 +11,7 @@ end
 
 function _update()
 	--Stops player moving whilst message is displayed
-	if not message[1] then
+	if not messages[1] then
 		player_movement()
 	end
 	update_camera()
@@ -166,7 +166,7 @@ end
 
 -- Prints message on screen
 function draw_msg()
-	if message[1] then
+	if messages[1] then
 		local y = 60
 		rectfill(6, y, 40, y + 6, 2)
 		print(msg_title, 7, y, 7)
@@ -177,7 +177,7 @@ end
 -- Enables the message to be deleted from table
 function update_msg()
 	if btnp(X) then
-		deli(message, 1)
+		deli(messages, 1)
 	end
 end
 
