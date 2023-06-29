@@ -42,6 +42,7 @@ function animation()
 		player.anim2 += player.timing
 		if player.anim2 > 31 then
 			player.anim2 = 29
+			-- verifier anim
 		end
 	end
 end
@@ -126,6 +127,29 @@ function check_sprite()
 	if mget(player_tile_x, player_tile_y) == map_sprite then
 		mset(player_tile_x, player_tile_y, 1)
 	end
+end
+
+function upickups()
+local x1 = player.x / 8
+	local y1 = player.y / 8
+	local x2 = (player.x + 7) / 8
+	local y2 = (player.y + 7) / 8
+
+	local a = fget(mget(x1, y1), 1)
+	local b = fget(mget(x1, y2), 1)
+	local c = fget(mget(x2, y2), 1)
+	local d = fget(mget(x2, y1), 1)
+
+	if a or b or c or d then
+		return true
+	else
+		return false
+	end
+end
+
+function grasscollection()
+if upickups() == true then
+mset(player_tile_x, player_tile_y, 1)
 end
 
 __gfx__
